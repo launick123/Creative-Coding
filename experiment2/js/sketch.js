@@ -1,67 +1,74 @@
-// sketch.js - purpose and description here
-// Author: Your Name
-// Date:
 
-// Here is how you might set up an OOP p5.js project
-// Note that p5.js looks for a file called sketch.js
+// for red, green, and blue color values
+let r, g, b;
+let red,gre,blu;
 
-// Constants - User-servicable parts
-// In a longer project I like to put these in a separate file
-const VALUE1 = 1;
-const VALUE2 = 2;
 
-// Globals
-let myInstance;
-let canvasContainer;
 
-class MyClass {
-    constructor(param1, param2) {
-        this.property1 = param1;
-        this.property2 = param2;
-    }
+let rad = 60; // Width of the shape
+let xpos, ypos; // Starting position of shape
 
-    myMethod() {
-        // code to run when method is called
-    }
-}
+let xspeed = 2.8; // Speed of the shape
+let yspeed = 2.2; // Speed of the shape
 
-// setup() function is called once when the program starts
+let xdirection = 1; // Left or Right
+let ydirection = 1; // Top to Bottom
+
+
 function setup() {
-    // place our canvas, making it fit our container
-    canvasContainer = $("#canvas-container");
-    let canvas = createCanvas(canvasContainer.width(), canvasContainer.height());
-    canvas.parent("canvas-container");
-    // resize canvas is the page is resized
-    $(window).resize(function() {
-        console.log("Resizing...");
-        resizeCanvas(canvasContainer.width(), canvasContainer.height());
-    });
-    // create an instance of the class
-    myInstance = new MyClass(VALUE1, VALUE2);
+  createCanvas(1400, 900);
+  // Pick colors randomly
+  r = random(255);
+  g = random(255);
+  b = random(255);
 
-    var centerHorz = windowWidth / 2;
-    var centerVert = windowHeight / 2;
+  red = random(255);
+  gre = random(255);
+  blu = random(255);
+
+  frameRate(30);
+  ellipseMode(RADIUS);
+  // Set the starting position of the shape
+  xpos = width / 2;
+  ypos = height / 2;
 }
 
-// draw() function is called repeatedly, it's the main animation loop
 function draw() {
-    background(220);    
-    // call a method on the instance
-    myInstance.myMethod();
+  background(red,blu,gre,255);
+  // Draw a circle
+  strokeWeight(2);
+  noStroke();
+  fill(r, g, b, 255);
 
-    // Put drawings here
-    var centerHorz = canvasContainer.width() / 2 - 125;
-    var centerVert = canvasContainer.height() / 2 - 125;
-    fill(234, 31, 81);
-    noStroke();
-    rect(centerHorz, centerVert, 250, 250);
-    fill(255);
-    textStyle(BOLD);
-    textSize(140);
-    text("p5*", centerHorz + 10, centerVert + 200);
+  // Update the position of the shape
+  xpos = xpos + xspeed * xdirection;
+  ypos = ypos + yspeed * ydirection;
+
+  // Test to see if the shape exceeds the boundaries of the screen
+  // If it does, reverse its direction by multiplying by -1
+  if (xpos > width - rad || xpos < rad) {
+    xdirection *= -1;
+  }
+  if (ypos > height - rad || ypos < rad) {
+    ydirection *= -1;
+  }
+
+  // Draw the shape
+  ellipse(xpos, ypos, rad, rad);
 }
 
-// mousePressed() function is called once after every time a mouse button is pressed
+// When the user clicks the mouse
 function mousePressed() {
-    // code to run when mouse is pressed
+  // Check if mouse is inside the circle
+  let d = dist(mouseX, mouseY, xpos, ypos);
+  if (d < 100) {
+    // Pick new random color values
+    r = random(255);
+    g = random(255);
+    b = random(255);
+
+    red = random(255);
+    gre = random(255);
+    blu = random(255);
+  }
 }

@@ -24,7 +24,7 @@ function draw() {
     text(planet[i], 0, 0);
 
     translate(10,10);
-    text(planet[i],0,0);
+    text(distance[i],0,0);
     pop();
 
   }

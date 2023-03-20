@@ -39,7 +39,7 @@ classifier = ml5.imageClassifier('DoodleNet');
 
 function setup() {
 my_canvas = createCanvas(800, 1000);
-background(220);
+background("lightblue");
 grammar = createTraceryGrammar();
 
 //creates a picture frame
@@ -211,11 +211,14 @@ noStroke();
 
 textSize(18);
 fill('black');
-text("C will clear the Canvas",250,875);
-text("Ctrl takes a screenshot",550,875);
-
-
-text(prompt, 400, 935);
+text("C will clear the Canvas",250,850);
+text("Ctrl takes a screenshot",550,850);
+text("R Changes brush to Rectangle",150,900);
+text("E Changes brush to Ellipse",400,900);
+text("T Changes brush to Triangle",650,900);
+stroke('black');
+strokeWeight(1);
+text(prompt, 400, 950);
 noFill();
 }
 
